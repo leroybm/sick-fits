@@ -12,11 +12,15 @@ const Mutation = {
    * @param {*} info
    */
   async createItem(parent, args, ctx, info) {
-    // TODO: Check if they are logged in
-
+    errorIfFalse(!ctx.request.userId, 'You must be logged in to do that')
     const item = await ctx.db.mutation.createItem(
       {
         data: {
+          user: {
+            connect: {
+              id: ctx.request.userId,
+            },
+          },
           ...args,
         },
       },
@@ -81,7 +85,7 @@ const Mutation = {
       },
       info,
     )
-    loginUtils.setLoginCookie(user.id, ctx)
+    loginUtils.setLoginToken(user.id, ctx)
     return user
   },
 
@@ -98,7 +102,7 @@ const Mutation = {
     errorIfFalse(!user, `No such user found for email ${email}`)
     const valid = await loginUtils.comparePasswords(password, user.password)
     errorIfFalse(!valid, 'Invalid password!')
-    loginUtils.setLoginCookie(user.id, ctx)
+    loginUtils.setLoginToken(user.id, ctx)
     return user
   },
 
