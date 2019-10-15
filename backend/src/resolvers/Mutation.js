@@ -127,7 +127,7 @@ const Mutation = {
     const resetToken = await loginUtils.generateResetToken()
     const resetTokenExpiry = Date.now() + HOUR
     const res = await ctx.db.mutation.updateUser({
-      where: { email: email },
+      where: { email },
       data: { resetToken, resetTokenExpiry },
     })
     return { message: 'Success' }
@@ -161,7 +161,7 @@ const Mutation = {
       },
       info,
     )
-    setLoginCookie(updatedUser.id, ctx)
+    loginUtils.setLoginToken(updatedUser.id, ctx)
     return updatedUser
   },
 }

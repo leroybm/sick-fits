@@ -45,7 +45,7 @@ async function comparePasswords(a, b) {
  * @async
  * @returns {String}
  */
-async function generateRestToken() {
+async function generateResetToken() {
   const randomBytesPromisified = promisify(randomBytes)
   return (await randomBytesPromisified(20)).toString('hex')
 }
@@ -54,7 +54,7 @@ module.exports = {
   setLoginToken,
   hashPassword,
   comparePasswords,
-  generateRestToken,
+  generateResetToken,
   HOUR,
   YEAR,
 }
