@@ -1,6 +1,7 @@
 const { errorIfFalse } = require('../utils/error')
 const loginUtils = require('../utils/login')
 const { HOUR } = loginUtils
+const { transport, makeANiceEmail } = require('../mail')
 
 const Mutation = {
   /**
@@ -129,6 +130,13 @@ const Mutation = {
     const res = await ctx.db.mutation.updateUser({
       where: { email },
       data: { resetToken, resetTokenExpiry },
+    })
+    const mailResponse = await transport.sendMail({
+      from: 'leroy@leroy.com',
+      to: user.email,
+      subject: 'Your password reset token',
+      html: makeANiceEmail(`Your password reset token is here
+      \n\n <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click here to reset</a>`),
     })
     return { message: 'Success' }
   },
