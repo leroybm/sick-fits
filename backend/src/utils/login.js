@@ -50,11 +50,33 @@ async function generateResetToken() {
   return (await randomBytesPromisified(20)).toString('hex')
 }
 
+/**
+ * Check if user has the permissions needed
+ * @param {Object} user
+ * @param {String[]} permissionsNeeded
+ */
+function hasPermission(user, permissionsNeeded) {
+  const matchedPermissions = user.permissions.filter(permissionTheyHave =>
+    permissionsNeeded.includes(permissionTheyHave),
+  )
+  if (!matchedPermissions.length) {
+    throw new Error(`You do not have sufficient permissions
+
+      : ${permissionsNeeded}
+
+      You Have:
+
+      ${user.permissions}
+      `)
+  }
+}
+
 module.exports = {
   setLoginToken,
   hashPassword,
   comparePasswords,
   generateResetToken,
+  hasPermission,
   HOUR,
   YEAR,
 }
