@@ -59,9 +59,17 @@ const Mutation = {
    * @param {*} info
    */
   async deleteItem(parent, args, ctx, info) {
+    errorIfFalse(!ctx.request.userId, 'You must be logged in!')
     const where = { id: args.id }
-    const item = await ctx.db.query.item({ where }, `{ id title }`)
-    // TODO check if we own it
+    const item = await ctx.db.query.item({ where }, `{ id title user { id }}`)
+    const onwsItem = item.user.id === ctx.request.userId
+    const hasPermission = ctx.request.user.permissions.some(permission =>
+      ['ADMIN', 'ITEMDELETE'].includes(permission),
+    )
+    errorIfFalse(
+      !(onwsItem || !hasPermission),
+      "You don't have permission to do that!",
+    )
     return ctx.db.mutation.deleteItem({ where }, info)
   },
 
@@ -175,6 +183,32 @@ const Mutation = {
     )
     loginUtils.setLoginToken(updatedUser.id, ctx)
     return updatedUser
+  },
+
+  async updatePermissions(parent, args, ctx, info) {
+    errorIfFalse(!ctx.request.userId, 'You must be logged in!')
+    const currentUser = await ctx.db.query.user(
+      {
+        where: {
+          id: ctx.request.userId,
+        },
+      },
+      info,
+    )
+    loginUtils.hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE'])
+    return ctx.db.mutation.updateUser(
+      {
+        data: {
+          permissions: {
+            set: args.permissions,
+          },
+        },
+        where: {
+          id: args.userId,
+        },
+      },
+      info,
+    )
   },
 }
 
