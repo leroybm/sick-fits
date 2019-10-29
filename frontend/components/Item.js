@@ -8,7 +8,7 @@ import PriceTag from './styles/PriceTag'
 import formatMoney from '../lib/formatMoney'
 
 class Item extends Component {
-  static PropTypes = {
+  static propTypes = {
     item: PropTypes.object.isRequired,
   }
 
@@ -32,7 +32,7 @@ class Item extends Component {
               query: { id: item.id },
             }}
           >
-            Edit ✏
+            <a>Edit ✏</a>
           </Link>
           <button>Add To Cart</button>
           <DeleteItem id={item.id}>Delete This Item</DeleteItem>
