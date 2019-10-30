@@ -12,7 +12,6 @@ type Mutation {
     image: String!
     largeImage: String!
   ): Item!
-  # TODO upload images
   updateItem(id: ID!, title: String, description: String, price: Int): Item!
   deleteItem(id: ID!): Item
   signup(email: String!, password: String!, name: String!): User!
@@ -27,6 +26,7 @@ type Mutation {
   updatePermissions(permissions: [Permission], userId: ID!): User
   addToCart(id: ID!): CartItem
   removeFromCart(id: ID!): CartItem
+  createOrder(token: String!): Order!
 }
 
 type Query {
