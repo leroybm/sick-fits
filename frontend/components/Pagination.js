@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import Head from 'next/head'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 import PaginationStyles from './styles/PaginationStyles'
 import { perPage } from '../config'
 
@@ -26,7 +27,7 @@ const Pagination = props => {
         const pages = Math.ceil(count / perPage)
         const page = props.page
         return (
-          <PaginationStyles>
+          <PaginationStyles data-test="pagination">
             <Head>
               <title>
                 Sick Fits! | Page {page} of {pages}
@@ -41,14 +42,14 @@ const Pagination = props => {
               </a>
             </Link>
             <p>
-              You are on page {page} of {pages}
+              Page {page} of <span className="totalPages">{pages}</span>
             </p>
             <p>{count} Items Total</p>
             <Link
               prefetch
               href={{ pathname: 'items', query: { page: page + 1 } }}
             >
-              <a className="prev" aria-disabled={page >= pages}>
+              <a className="next" aria-disabled={page >= pages}>
                 Next
               </a>
             </Link>
@@ -59,4 +60,9 @@ const Pagination = props => {
   )
 }
 
+Pagination.propTypes = {
+  page: PropTypes.number.isRequired,
+}
+
 export default Pagination
+export { PAGINATION_QUERY }
