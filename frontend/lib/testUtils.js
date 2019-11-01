@@ -1,7 +1,7 @@
 import casual from 'casual'
 
 // seed it so we get consistent results
-casual.seed(777)
+casual.seed(5061995)
 
 const fakeItem = () => ({
   __typename: 'Item',

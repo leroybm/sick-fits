@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Order /> renders and matches snapshot 1`] = `
+<div
+  className="OrderStyles-sc-4oqalm-0 camMij"
+  data-test="order"
+>
+  <SideEffect(Head)>
+    <Head />
+  </SideEffect(Head)>
+  <p>
+    <span>
+      Order ID:
+    </span>
+    <span>
+      ord123
+    </span>
+  </p>
+  <p>
+    <span>
+      Charge
+    </span>
+    <span>
+      ch_123
+    </span>
+  </p>
+  <p>
+    <span>
+      Date
+    </span>
+    <span>
+      31 de março de 2018, 21:00
+    </span>
+  </p>
+  <p>
+    <span>
+      Order Total
+    </span>
+    <span>
+      R$400
+    </span>
+  </p>
+  <p>
+    <span>
+      Item Count
+    </span>
+    <span>
+      2
+    </span>
+  </p>
+  <div
+    className="items"
+  >
+    <div
+      className="order-item"
+      key="1cf218a3-c4cd-46b1-bf4f-9bf56e730a78"
+    >
+      <img
+        alt="vel quaerat sit animi ratione nemo iusto"
+        src="maxime.jpg"
+      />
+      <div
+        className="item-details"
+      >
+        <h2>
+          vel quaerat sit animi ratione nemo iusto
+        </h2>
+        <p>
+          Qty: 
+          1
+        </p>
+        <p>
+          Each: 
+          R$42.34
+        </p>
+        <p>
+          Subtotal: 
+          R$42.34
+        </p>
+        <p>
+          eaque sapiente esse et dolor excepturi est
+        </p>
+      </div>
+    </div>
+    <div
+      className="order-item"
+      key="e88ced80-7920-404c-9cbf-8fedd9ff9b06"
+    >
+      <img
+        alt="ab ut earum sed eum et nam"
+        src="dolorem.jpg"
+      />
+      <div
+        className="item-details"
+      >
+        <h2>
+          ab ut earum sed eum et nam
+        </h2>
+        <p>
+          Qty: 
+          1
+        </p>
+        <p>
+          Each: 
+          R$42.34
+        </p>
+        <p>
+          Subtotal: 
+          R$42.34
+        </p>
+        <p>
+          repellendus asperiores ut similique ut aut veniam
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
